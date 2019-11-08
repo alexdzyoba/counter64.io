@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/alexdzyoba/counter64"
 	"github.com/gin-gonic/gin"
@@ -18,6 +19,8 @@ func main() {
 	counter := counter64.New()
 	go counter.Count(done)
 
+	start := time.Now()
+
 	router := gin.Default()
 	router.LoadHTMLFiles("templates/index.tmpl")
 	router.GET("/", func(c *gin.Context) {
@@ -27,6 +30,7 @@ func main() {
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
 			"decimal":     dec,
 			"hexademical": hex,
+			"started":     start,
 		})
 	})
 

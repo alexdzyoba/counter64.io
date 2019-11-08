@@ -1,4 +1,16 @@
+<!DOCTYPE html>
 <html>
-	<h2><pre>{{ .decimal }}</pre></h2>
-	<h2><pre>{{ .hexademical }}</pre></h2>
+  <head>
+    <meta charset="UTF-8">
+    <title>counter64</title>
+  <style type="text/css">
+  </style>
+  </head>
+  <body>
+    <h1>counter64</h1>
+    <h2>Counter was started at {{ .started.Format "Mon, 02 Jan 2006 15:04:05 MST" }}</h2>
+    <p>Current value is</p>
+    <h3>In decimal: <code>{{ .decimal }}</code></h3>
+    <h3>In hex: <code>{{ .hexademical }}</code></h3>
+  </body>
 </html>
