@@ -3,14 +3,41 @@
   <head>
     <meta charset="UTF-8">
     <title>counter64</title>
-  <style type="text/css">
-  </style>
+    <style type="text/css">
+      body {
+        font-family: sans;
+        background: lightgray;
+      }
+      h3 {
+        user-select: none;
+        cursor: pointer;
+      }
+      #wrapper {
+        text-align: center;
+        font-size: 2rem;
+      }
+      .footer {
+        font-size: 1rem;
+      }
+    </style>
   </head>
   <body>
-    <h1>counter64</h1>
-    <h2>Counter was started at {{ .started.Format "Mon, 02 Jan 2006 15:04:05 MST" }}</h2>
-    <p>Current value is</p>
-    <h3>In decimal: <code>{{ .decimal }}</code></h3>
-    <h3>In hex: <code>{{ .hexademical }}</code></h3>
+    <div id="wrapper">
+      <h2>Will it ever overflow?</h2>
+      <h3 id="decimal" onclick="swap('decimal', 'hexademical')"><code>{{ .decimal }}</code></h3>
+      <h3 id="hexademical" onclick="swap('hexademical', 'decimal')" style="display: none" ><code>{{ .hexademical }}</code></h3>
+      This counter was started at <br/>
+      {{ .started.Format "Mon, 02 Jan 2006 15:04:05 MST" }}<br/>
+      and it increments in a loop as fast as it can.<br/>
+      Refresh the page to get the current value.<br/>
+      <p class="footer">This project is open source, check it <a href="https://github.com/alexdzyoba/counter64.io">on Github</a>.</p>
+    </div>
   </body>
+  <script type="text/javascript">
+    function swap(hide, show) {
+      document.getElementById(hide).style.display="none";
+      document.getElementById(show).style.display="block";
+    }
+  </script>
 </html>
+<!-- vim: set ts=2 sw=2: -->
