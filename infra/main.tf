@@ -3,10 +3,6 @@ provider "aws" {
   profile = "counter64"
 }
 
-resource "aws_route53_zone" "primary" {
-  name = "counter64.io"
-}
-
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 
