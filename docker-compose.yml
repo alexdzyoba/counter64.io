@@ -1,0 +1,25 @@
+---
+version: '3'
+
+services:
+  proxy:
+    image: traefik:v2.0
+    environment:
+      TRAEFIK_LOG_LEVEL: INFO
+      TRAEFIK_PROVIDERS_DOCKER: "true"
+      TRAEFIK_ACCESSLOG: "true"
+      TRAEFIK_ACCESSLOG_FORMAT: "json"
+      TRAEFIK_METRICS_PROMETHEUS: "true"
+    ports:
+      - "80:80"
+      # - "443:443"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  app:
+    image: alexdzyoba/counter64.io
+    labels:
+      - "traefik.http.routers.counter64.rule=Host(`counter64.docker.localhost`)"
+      - "traefik.http.routers.counter64.rule=Host(`www.counter64.io`)"
