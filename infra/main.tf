@@ -100,3 +100,20 @@ resource "aws_instance" "app" {
     Role = "app"
   }
 }
+
+resource "aws_eip" "public" {
+  instance = aws_instance.app.id
+  vpc      = true
+}
+
+data "aws_route53_zone" "root" {
+  name = "counter64.io."
+}
+
+resource "aws_route53_record" "www" {
+  zone_id = data.aws_route53_zone.root.zone_id
+  name    = "www.${data.aws_route53_zone.root.name}"
+  type    = "A"
+  ttl     = "300"
+  records = [aws_eip.public.public_ip]
+}
