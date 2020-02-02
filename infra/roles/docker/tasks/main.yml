@@ -1,0 +1,26 @@
+---
+- name: Install prerequisites
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  loop: "{{ docker_prerequisites }}"
+
+- name: Install Docker apt repo key
+  apt_key:
+    url: "{{ docker_apt_key_url }}"
+    id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
+
+- name: Add Docker apt repo
+  apt_repository:
+    repo: "{{ docker_apt_repo }}"
+    filename: docker
+
+- name: Install Docker
+  apt:
+    name: docker-ce
+    update_cache: yes
+
+- name: Install docker modules for Ansible
+  pip:
+    name: [docker, docker-compose]
+    state: present

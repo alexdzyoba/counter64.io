@@ -1,0 +1,11 @@
+---
+docker_prerequisites:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg2
+  - software-properties-common
+  - python-pip
+
+docker_apt_key_url: "https://download.docker.com/linux/debian/gpg"
+docker_apt_repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"

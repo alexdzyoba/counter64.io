@@ -97,5 +97,6 @@ resource "aws_instance" "app" {
 
   tags = {
     Name = "app"
+    Role = "app"
   }
 }
